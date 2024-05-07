@@ -11,7 +11,7 @@ export default function Orders() {
 
   const navigate = useNavigate();
   const handleOnClickButton = () => {
-    navigate('/');
+    navigate("/");
   };
 
   React.useEffect(() => {

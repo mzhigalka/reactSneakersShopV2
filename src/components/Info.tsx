@@ -1,7 +1,22 @@
-import React from "react";
+import { FC, MouseEventHandler } from "react";
 
-const Info = ({ image, title, description, width, height, onClickButton }) => {
-  
+interface InfoProps {
+  image: string;
+  title: string;
+  description: string;
+  width: number;
+  height: number;
+  onClickButton: MouseEventHandler<HTMLButtonElement>;
+}
+
+const Info: FC<InfoProps> = ({
+  image,
+  title,
+  description,
+  width,
+  height,
+  onClickButton,
+}) => {
   return (
     <div className="cart__empty cart__orders cart d-flex align-center justify-center flex-column flex">
       <img src={image} alt="Empty" width={width} height={height} />
