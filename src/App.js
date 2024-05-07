@@ -17,7 +17,7 @@ import AppContext from "./context";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Orders from "./pages/Orders";
-import Swiper from "./Swiper";
+import Slider from "./Swiper";
 
 function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
@@ -156,7 +156,7 @@ function App() {
         )}
         <Header onClickCart={() => setCartOpened(true)} />
 
-        {isHomePage && <Swiper scrollTo={scrollTo} />}
+        {isHomePage && <Slider scrollTo={scrollTo} />}
 
         <Routes>
           <Route

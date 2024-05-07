@@ -1,10 +1,20 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
-
+import { FC } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 
-export default ({ scrollTo }) => {
+type SliderProp = {
+  scrollTo: string;
+};
+
+const Slider: FC<SliderProp> = ({ scrollTo }) => {
+  const handleScrollTo = () => {
+    const element = document.getElementById(scrollTo);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <Swiper
       pagination={true}
@@ -19,7 +29,7 @@ export default ({ scrollTo }) => {
               <span>Stan Smith</span>,
               <br /> Forever!
             </h1>
-            <button onClick={scrollTo}>Купить</button>
+            <button onClick={handleScrollTo}>Купить</button>
           </div>
           <img src="img/slider.svg" alt="Swiper" />
         </div>
@@ -51,3 +61,5 @@ export default ({ scrollTo }) => {
     </Swiper>
   );
 };
+
+export default Slider;
