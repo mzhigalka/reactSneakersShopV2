@@ -1,8 +1,24 @@
-import React from "react";
-
+import { FC, Dispatch, SetStateAction, ChangeEvent } from "react";
 import Card from "../components/Card";
 
-export default function Home({
+interface Item {
+  id: number;
+  title: string;
+  price: number;
+  imageUrl: string;
+}
+
+interface Home {
+  items: Item[];
+  searchValue: string;
+  setSearchValue: Dispatch<SetStateAction<string>>;
+  onChangeSearchInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  onAddToFavorite: (obj: Item) => Promise<void>;
+  onAddToCart: (obj: Item) => Promise<void>;
+  isLoading: boolean;
+}
+
+const Home: FC<Home> = ({
   items,
   searchValue,
   setSearchValue,
@@ -10,10 +26,10 @@ export default function Home({
   onAddToFavorite,
   onAddToCart,
   isLoading,
-}) {
+}) => {
   const renderItems = () => {
     const filtredItems = items.filter(
-      (item) =>
+      (item: { title: string }) =>
         item.title &&
         item.title.toLowerCase().includes(searchValue.toLowerCase())
     );
@@ -21,8 +37,8 @@ export default function Home({
     return (isLoading ? [...Array(8)] : filtredItems).map((item, index) => (
       <Card
         key={index}
-        onFavorite={(obj) => onAddToFavorite(obj)}
-        onPlus={(obj) => onAddToCart(obj)}
+        onFavorite={(obj: Item) => onAddToFavorite(obj)}
+        onPlus={(obj: Item) => onAddToCart(obj)}
         loading={isLoading}
         {...item}
       />
@@ -58,4 +74,6 @@ export default function Home({
       </div>
     </div>
   );
-}
+};
+
+export default Home;
