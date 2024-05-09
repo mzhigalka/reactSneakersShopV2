@@ -1,12 +1,22 @@
-import React from "react";
-import Card from "../components/Card";
-import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import AppContext from "../context";
+import React, { FC } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import AppContext, { AppContextType } from "../context";
+
+import Card from "../components/Card";
 import Info from "../components/Info";
 
-export default function Orders() {
-  const { onAddToFavorite, onAddToCart } = React.useContext(AppContext);
+import { Item } from "./Home";
+
+// interface Order {
+//   id: string;
+//   imageUrl: string;
+//   price: number;
+//   title: string;
+// }
+
+const Orders: FC = () => {
+  const { onAddToFavorite } = React.useContext(AppContext) as AppContextType;
   const [orders, setOrders] = React.useState([]);
 
   const navigate = useNavigate();
@@ -20,7 +30,7 @@ export default function Orders() {
         const { data } = await axios.get(
           "https://65b0c894d16d31d11bdd3bd9.mockapi.io/cart"
         );
-        setOrders(data.map((obj) => obj));
+        setOrders(data.map((obj: Item) => obj));
         // setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
       } catch (error) {
         alert("Ошибка при запросе заказов");
@@ -46,10 +56,10 @@ export default function Orders() {
             <h1 className="content__title ">Мои покупки</h1>
           </div>
           <div className="main-cards d-flex flex-wrap">
-            {orders.map((item, index) => (
+            {orders.map((item: any, index) => (
               <Card
                 key={index}
-                onFavorite={(obj) => onAddToFavorite(obj)}
+                onFavorite={(obj: Item) => onAddToFavorite(obj)}
                 {...item}
               />
             ))}
@@ -67,4 +77,6 @@ export default function Orders() {
       )}
     </div>
   );
-}
+};
+
+export default Orders;

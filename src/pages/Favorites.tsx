@@ -1,11 +1,14 @@
-import React from "react";
-import Card from "../components/Card";
+import React, { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import AppContex from "../context";
+import AppContext, { AppContextType } from "../context";
+
+import Card from "../components/Card";
 import Info from "../components/Info";
 
-export default function Favorites() {
-  const { favorites, onAddToFavorite } = React.useContext(AppContex);
+const Favorites: FC = () => {
+  const { favorites, onAddToFavorite } = React.useContext(
+    AppContext
+  ) as AppContextType;
 
   const navigate = useNavigate();
   const handleOnClickButton = () => {
@@ -29,8 +32,9 @@ export default function Favorites() {
             <h1 className="content__title ">Мои закладки</h1>
           </div>
           <div className="main-cards d-flex justify-between flex-wrap">
-            {favorites.map((item, index) => (
+            {favorites.map((item, index: number) => (
               <Card
+                onPlus={undefined}
                 key={index}
                 favorited={true}
                 onFavorite={onAddToFavorite}
@@ -52,4 +56,6 @@ export default function Favorites() {
       )}
     </div>
   );
-}
+};
+
+export default Favorites;

@@ -1,14 +1,14 @@
 import { FC, Dispatch, SetStateAction, ChangeEvent } from "react";
 import Card from "../components/Card";
 
-interface Item {
+export interface Item {
   id: number;
   title: string;
   price: number;
   imageUrl: string;
 }
 
-interface Home {
+export interface HomeTypes {
   items: Item[];
   searchValue: string;
   setSearchValue: Dispatch<SetStateAction<string>>;
@@ -18,7 +18,7 @@ interface Home {
   isLoading: boolean;
 }
 
-const Home: FC<Home> = ({
+const Home: FC<HomeTypes> = ({
   items,
   searchValue,
   setSearchValue,
