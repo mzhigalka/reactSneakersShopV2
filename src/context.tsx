@@ -1,15 +1,13 @@
 import React from "react";
 import { Item } from "./pages/Home";
 
-type FavoritesItem = Item;
-
 export interface AppContextType {
   onAddToFavorite: (obj: Item) => Promise<void>;
-  favorites: FavoritesItem[];
+  setCartItems: (items: Item[]) => void;
+  favorites: Item[];
+  cartItems: Item[];
   // isItemAdded: ;
   // setCartOpened: ;
-  // cartItems:;
-  // setCartItems:;
 }
 
 const AppContext = React.createContext({});

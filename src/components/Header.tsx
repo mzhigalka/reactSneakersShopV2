@@ -1,9 +1,12 @@
-import React from "react";
+import { FC, MouseEventHandler } from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../hooks/useCart";
 
-import { useCart } from "../hooks/useCart"
+interface HeaderProps {
+  onClickCart: MouseEventHandler<HTMLLIElement>;
+}
 
-export default function Header(props) {
+const Header: FC<HeaderProps> = ({ onClickCart }) => {
   const { totalPrice } = useCart();
 
   return (
@@ -19,7 +22,7 @@ export default function Header(props) {
       </Link>
       <div className="header__main">
         <ul className="header__list d-flex ">
-          <li className="header__list-item cu-p" onClick={props.onClickCart}>
+          <li className="header__list-item cu-p" onClick={onClickCart}>
             <img
               className="header__list-item--img"
               width={20}
@@ -57,4 +60,6 @@ export default function Header(props) {
       </div>
     </header>
   );
-}
+};
+
+export default Header;
