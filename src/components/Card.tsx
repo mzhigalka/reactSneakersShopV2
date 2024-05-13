@@ -1,19 +1,31 @@
-import React from "react";
+import React, { FC } from "react";
+import { Item } from "../pages/Home";
+import AppContext, { AppContextType } from "../context";
 import ContentLoader from "react-content-loader";
-import AppContext from "../context";
 
-export default function Card({
+interface CardProps {
+  id: number;
+  title: string;
+  price: number;
+  imageUrl: string;
+  onFavorite: (obj: Item) => Promise<void>;
+  onPlus: any | undefined;
+  favorited: boolean;
+  loading: boolean;
+  added?: boolean;
+}
+
+const Card: FC<CardProps> = ({
   id,
   title,
   price,
+  onPlus,
   imageUrl,
   onFavorite,
-  onPlus,
   favorited = false,
   loading = false,
-  added = true,
-}) {
-  const { isItemAdded } = React.useContext(AppContext);
+}) => {
+  const { isItemAdded } = React.useContext(AppContext) as AppContextType;
   const [isFavorite, setIsFavorite] = React.useState(favorited);
   const obj = { id, parentId: id, title, price, imageUrl };
 
@@ -86,4 +98,6 @@ export default function Card({
       )}
     </div>
   );
-}
+};
+
+export default Card;

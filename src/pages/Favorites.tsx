@@ -34,6 +34,7 @@ const Favorites: FC = () => {
           <div className="main-cards d-flex justify-between flex-wrap">
             {favorites.map((item, index: number) => (
               <Card
+                loading={false}
                 onPlus={undefined}
                 key={index}
                 favorited={true}
