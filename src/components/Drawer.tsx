@@ -1,19 +1,27 @@
-import React from "react";
+import React, { FC } from "react";
 import Info from "./Info";
 import axios from "axios";
 import { useCart } from "../hooks/useCart";
-import AppContext from "../context";
+import AppContext, { AppContextType } from "../context";
+import { Item } from "../pages/Home";
 
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+interface DrawerProps {
+  onRemove: (id: number) => void;
+  onClose: (arg: any) => void;
+  items: Item[];
+}
 
-export default function Drawer({ onClose, items = [], onRemove }) {
+const delay = (ms: number | undefined) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
+const Drawer: FC<DrawerProps> = ({ onClose, items = [], onRemove }) => {
   const { cartItems, setCartItems, totalPrice, totalPriceWithProcent } =
     useCart();
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(true);
-  const [isOrderComplete, setIsOrderComplete] = React.useState(false);
-  const [orderId, setOrderId] = React.useState(null);
+  const [isDrawerOpen] = React.useState<boolean>(true);
+  const [isOrderComplete, setIsOrderComplete] = React.useState<boolean>(false);
+  const [orderId, setOrderId] = React.useState<null>(null);
 
-  const { setCartOpened } = React.useContext(AppContext);
+  const { setCartOpened } = React.useContext(AppContext) as AppContextType;
 
   const onClickOrder = async () => {
     //fake axios request
@@ -57,7 +65,7 @@ export default function Drawer({ onClose, items = [], onRemove }) {
   }, [isDrawerOpen]);
 
   return (
-    <div className={`overlay ${isDrawerOpen ? "overlay-open" : ""}`}>
+    <div className={`overlay ${isDrawerOpen ? "overlay-open" : null}`}>
       <div className="drawer d-flex flex-column">
         <h2 className="d-flex justify-between mb-30">
           Корзина
@@ -72,7 +80,7 @@ export default function Drawer({ onClose, items = [], onRemove }) {
         {items.length > 0 ? (
           <div className="d-flex flex-column flex">
             <div className="items">
-              {items.map((obj) => (
+              {items.map((obj: Item) => (
                 <div
                   key={obj.id}
                   className="cart__item d-flex align-center mb-20"
@@ -137,4 +145,6 @@ export default function Drawer({ onClose, items = [], onRemove }) {
       </div>
     </div>
   );
-}
+};
+
+export default Drawer;
