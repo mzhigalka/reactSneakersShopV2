@@ -1,9 +1,10 @@
-import React, { FC } from "react";
 import Info from "./Info";
 import axios from "axios";
-import { useCart } from "../hooks/useCart";
-import AppContext, { AppContextType } from "../context";
+import React, { FC } from "react";
 import { Item } from "../pages/Home";
+import { useCart } from "../hooks/useCart";
+import AppContext from "../context/context";
+import { AppContextType } from "../context/types";
 
 interface DrawerProps {
   onRemove: (id: number) => void;

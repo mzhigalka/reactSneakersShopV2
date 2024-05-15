@@ -1,23 +1,17 @@
 import axios from "axios";
 import React, { FC } from "react";
+import AppContext from "../context/context";
+import { AppContextType } from "../context/types";
 import { Link, useNavigate } from "react-router-dom";
-import AppContext, { AppContextType } from "../context";
 
 import Card from "../components/Card";
 import Info from "../components/Info";
 
 import { Item } from "./Home";
 
-// interface Order {
-//   id: string;
-//   imageUrl: string;
-//   price: number;
-//   title: string;
-// }
-
 const Orders: FC = () => {
   const { onAddToFavorite } = React.useContext(AppContext) as AppContextType;
-  const [orders, setOrders] = React.useState([]);
+  const [orders, setOrders] = React.useState<Item[]>([]);
 
   const navigate = useNavigate();
   const handleOnClickButton = () => {
@@ -56,8 +50,11 @@ const Orders: FC = () => {
             <h1 className="content__title ">Мои покупки</h1>
           </div>
           <div className="main-cards d-flex flex-wrap">
-            {orders.map((item: any, index) => (
+            {orders.map((item, index: number) => (
               <Card
+                onPlus={undefined}
+                favorited={false}
+                loading={false}
                 key={index}
                 onFavorite={(obj: Item) => onAddToFavorite(obj)}
                 {...item}

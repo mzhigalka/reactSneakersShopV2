@@ -1,6 +1,7 @@
 import React from "react";
-import AppContext, { AppContextType } from "../context";
 import { Item } from "../pages/Home";
+import AppContext from "../context/context";
+import { AppContextType } from "../context/types";
 
 export const useCart = () => {
   const { cartItems, setCartItems } = React.useContext(AppContext) as AppContextType;

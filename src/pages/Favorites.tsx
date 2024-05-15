@@ -1,6 +1,7 @@
 import React, { FC } from "react";
+import AppContext from "../context/context";
+import { AppContextType } from "../context/types";
 import { Link, useNavigate } from "react-router-dom";
-import AppContext, { AppContextType } from "../context";
 
 import Card from "../components/Card";
 import Info from "../components/Info";

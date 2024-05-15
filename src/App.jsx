@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 import { animateScroll as scroll } from "react-scroll";
 
-import AppContext from "./context";
+import AppContext from "./context/context";
 
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";

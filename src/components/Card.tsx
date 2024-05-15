@@ -1,7 +1,8 @@
 import React, { FC } from "react";
 import { Item } from "../pages/Home";
-import AppContext, { AppContextType } from "../context";
+import AppContext from "../context/context";
 import ContentLoader from "react-content-loader";
+import { AppContextType } from "../context/types";
 
 interface CardProps {
   id: number;
