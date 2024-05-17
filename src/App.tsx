@@ -10,22 +10,22 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import { animateScroll as scroll } from "react-scroll";
+// import { animateScroll as scroll } from "react-scroll";
 
 import AppContext from "./context/context";
 
-import Home from "./pages/Home";
+import Home, { Item } from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Orders from "./pages/Orders";
 import Slider from "./Swiper";
 
 function App() {
-  const [cartOpened, setCartOpened] = React.useState(false);
   const [items, setItems] = React.useState([{}]);
-  const [favorites, setFavorites] = React.useState([]);
-  const [cartItems, setCartItems] = React.useState([]);
-  const [searchValue, setSearchValue] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [favorites, setFavorites] = React.useState<Item[]>([]);
+  const [cartItems, setCartItems] = React.useState<Item[]>([]);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [searchValue, setSearchValue] = React.useState<string>("");
+  const [cartOpened, setCartOpened] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     async function fetchData() {
@@ -50,7 +50,7 @@ function App() {
     fetchData();
   }, []);
 
-  const onAddToCart = async (obj) => {
+  const onAddToCart = async (obj: Item) => {
     try {
       const findItem = cartItems.find(
         (item) => Number(item.parentId) === Number(obj.id)
@@ -86,7 +86,7 @@ function App() {
     }
   };
 
-  const onRemoveToCart = (id) => {
+  const onRemoveToCart = (id: number) => {
     try {
       axios.delete(`https://65b0c894d16d31d11bdd3bd9.mockapi.io/cart/${id}`);
       setCartItems((prev) =>
@@ -97,7 +97,7 @@ function App() {
     }
   };
 
-  const onAddToFavorite = async (obj) => {
+  const onAddToFavorite = async (obj: Item) => {
     try {
       if (favorites.find((favObj) => Number(favObj.id) === Number(obj.id))) {
         axios.delete(
@@ -119,20 +119,17 @@ function App() {
     }
   };
 
-  const onChangeSearchInput = (e) => {
+  const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
 
-  const isItemAdded = (id) => {
+  const isItemAdded = (id: number) => {
     return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
   const location = useLocation();
   const isHomePage = location.pathname === "/";
-  const scrollTo = () => {
-    scroll.scrollTo(570);
-  };
-
+  
   return (
     <AppContext.Provider
       value={{
@@ -156,7 +153,7 @@ function App() {
         )}
         <Header onClickCart={() => setCartOpened(true)} />
 
-        {isHomePage && <Slider scrollTo={scrollTo} />}
+        {isHomePage && <Slider scrollTo={"570"} />}
 
         <Routes>
           <Route
