@@ -6,10 +6,12 @@ export interface Item {
   title: string;
   price: number;
   imageUrl: string;
+  parentId?: number;
 }
 
 export interface HomeTypes {
   items: Item[];
+  cartItems?: Item[];
   searchValue: string;
   setSearchValue: Dispatch<SetStateAction<string>>;
   onChangeSearchInput: (e: ChangeEvent<HTMLInputElement>) => void;

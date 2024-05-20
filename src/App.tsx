@@ -20,7 +20,7 @@ import Orders from "./pages/Orders";
 import Slider from "./Swiper";
 
 function App() {
-  const [items, setItems] = React.useState([{}]);
+  const [items, setItems] = React.useState<Item[]>([{} as Item]);
   const [favorites, setFavorites] = React.useState<Item[]>([]);
   const [cartItems, setCartItems] = React.useState<Item[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
