@@ -129,7 +129,7 @@ function App() {
 
   const location = useLocation();
   const isHomePage = location.pathname === "/";
-  
+
   return (
     <AppContext.Provider
       value={{
@@ -158,7 +158,6 @@ function App() {
         <Routes>
           <Route
             path="/"
-            exact={true}
             element={
               <Home
                 items={items}
@@ -174,8 +173,8 @@ function App() {
           ></Route>
         </Routes>
         <Routes>
-          <Route path="/favorites" exact={true} element={<Favorites />}></Route>
-          <Route path="/orders" exact={true} element={<Orders />}></Route>
+          <Route path="/favorites" element={<Favorites />}></Route>
+          <Route path="/orders" element={<Orders />}></Route>
         </Routes>
       </div>
     </AppContext.Provider>
