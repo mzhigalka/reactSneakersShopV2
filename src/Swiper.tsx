@@ -1,20 +1,14 @@
 import "swiper/css";
-import { FC } from "react";
+import { FC, MouseEventHandler } from "react";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 type SliderProp = {
-  scrollTo: string;
+  scrollTo: MouseEventHandler<HTMLButtonElement>;
 };
 
 const Slider: FC<SliderProp> = ({ scrollTo }) => {
-  const handleScrollTo = () => {
-    const element = document.getElementById(scrollTo);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
   return (
     <Swiper
       pagination={true}
@@ -29,7 +23,7 @@ const Slider: FC<SliderProp> = ({ scrollTo }) => {
               <span>Stan Smith</span>,
               <br /> Forever!
             </h1>
-            <button onClick={handleScrollTo}>Купить</button>
+            <button onClick={scrollTo}>Купить</button>
           </div>
           <img src="img/slider.svg" alt="Swiper" />
         </div>
@@ -41,7 +35,7 @@ const Slider: FC<SliderProp> = ({ scrollTo }) => {
               <span>Stan Smith</span>,
               <br /> Forever!
             </h1>
-            <button>Купить</button>
+            <button onClick={scrollTo}>Купить</button>
           </div>
           <img src="img/slider.svg" alt="Swiper" />
         </div>
@@ -53,7 +47,7 @@ const Slider: FC<SliderProp> = ({ scrollTo }) => {
               <span>Stan Smith</span>,
               <br /> Forever!
             </h1>
-            <button>Купить</button>
+            <button onClick={scrollTo}>Купить</button>
           </div>
           <img src="img/slider.svg" alt="Swiper" />
         </div>
