@@ -18,7 +18,7 @@ import AppContext from "./context/context";
 import Home, { Item } from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Orders from "./pages/Orders";
-import Slider from "./Swiper";
+import Slider from "./components/Swiper";
 
 function App() {
   const [items, setItems] = React.useState<Item[]>([{} as Item]);
@@ -187,6 +187,3 @@ function App() {
 }
 
 export default App;
-
-
-//added scroll and types for button
